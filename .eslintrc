@@ -1,0 +1,21 @@
+{
+  "parser"  : "babel-eslint",
+  "extends" : [
+    "standard",
+    "standard-react"
+  ],
+  "plugins": [
+    "babel",
+    "react",
+    "promise"
+  ],
+  "env"     : {
+    "browser" : true
+  },
+  "rules": {
+    "comma-dangle": ["error", "always-multiline"],
+    "generator-star-spacing": "off",
+    "babel/generator-star-spacing": "warn",
+    "jsx-quotes": ["error", "prefer-single"]
+  }
+}

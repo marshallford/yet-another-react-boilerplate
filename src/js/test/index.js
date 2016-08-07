@@ -6,7 +6,7 @@ const Test = ({ msg }) => (
 )
 
 const mapStateToProps = (state, ownProps) => ({
-  msg: ownProps.location.pathname
+  msg: ownProps.location.pathname,
 })
 
 export { Test }

@@ -4,7 +4,7 @@ import test from 'test/testReducer'
 
 const rootReducer = combineReducers({
   routing: routerReducer,
-  test
+  test,
 })
 
 export default rootReducer

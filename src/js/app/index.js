@@ -6,8 +6,8 @@ import Test from 'test'
 const App = ({ store, history }) => (
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={Test}>
-        <Route path="about" component={Test}/>
+      <Route path='/' component={Test}>
+        <Route path='about' component={Test} />
       </Route>
     </Router>
   </Provider>

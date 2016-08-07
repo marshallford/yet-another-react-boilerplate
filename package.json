@@ -5,6 +5,7 @@
   "main": "./src/js/main.js",
   "scripts": {
     "clean": "rimraf dist",
+    "lint": "eslint src",
     "build:dev": "better-npm-run build:dev",
     "build:prod": "better-npm-run build:prod",
     "start": "better-npm-run start"
@@ -51,12 +52,20 @@
   },
   "devDependencies": {
     "babel-core": "^6.13.2",
+    "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.4",
     "babel-polyfill": "^6.13.0",
     "babel-preset-es2015": "^6.13.2",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
     "better-npm-run": "0.0.10",
+    "eslint": "^3.2.2",
+    "eslint-config-standard": "^5.3.5",
+    "eslint-config-standard-react": "^3.0.0",
+    "eslint-plugin-babel": "^3.3.0",
+    "eslint-plugin-promise": "^2.0.1",
+    "eslint-plugin-react": "^6.0.0",
+    "eslint-plugin-standard": "^2.0.0",
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.22.0",
     "nodemon": "^1.10.0",

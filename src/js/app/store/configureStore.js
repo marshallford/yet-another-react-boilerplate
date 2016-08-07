@@ -5,6 +5,7 @@ import rootReducer from './reducers'
 
 const configureStore = (initialState) => createStore(
   { ...rootReducer, routing: routerReducer },
-  applyMiddleware(thunk))
+  applyMiddleware(thunk)
+)
 
 export default configureStore
