@@ -1,15 +1,10 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { Router, Route } from 'react-router'
-import Test from 'test'
+import { Router } from 'react-router'
 
-const App = ({ store, history }) => (
+const App = ({ store, history, routes }) => (
   <Provider store={store}>
-    <Router history={history}>
-      <Route path='/' component={Test}>
-        <Route path='about' component={Test} />
-      </Route>
-    </Router>
+    <Router history={history} routes={routes} />
   </Provider>
 )
 

@@ -1,9 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-const Test = ({ msg }) => (
-  <h1>{ msg }</h1>
-)
+const Test = ({ msg }) => {
+  console.log('Test render')
+  return (
+    <h1>{ msg }</h1>
+  )
+}
 
 const mapStateToProps = (state, ownProps) => ({
   msg: ownProps.location.pathname,
