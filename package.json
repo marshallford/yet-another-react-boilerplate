@@ -2,7 +2,7 @@
   "name": "yet-another-react-boilerplate",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/js/main.js",
   "scripts": {
     "clean": "rimraf dist",
     "build:dev": "better-npm-run build:dev",
@@ -42,7 +42,10 @@
   "dependencies": {
     "lodash": "^4.14.1",
     "react": "^15.3.0",
-    "react-dom": "^15.3.0"
+    "react-dom": "^15.3.0",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.13.2",

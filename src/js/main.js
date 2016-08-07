@@ -1,24 +1,30 @@
 import 'react-hot-loader/patch'
 import React from 'react'
 import { render } from 'react-dom'
-import { AppContainer } from 'react-hot-loader';
-import App from 'components/App'
+import { AppContainer } from 'react-hot-loader'
+import configureStore from 'app/store'
+import App from 'app'
+import store from 'app/store'
 
 render(
   <AppContainer>
-    <App />
+    <App
+      store={store}
+    />
   </AppContainer>,
   document.getElementById('app')
 )
 
 if (module.hot) {
-  module.hot.accept('./components/App', () => {
-    const AppComponent = require('./components/App').default;
+  module.hot.accept('app', () => {
+    const AppNext = require('app').default
     render(
       <AppComponent>
-        <App />
+        <AppNext
+          store={store}
+        />
       </AppComponent>,
       document.getElementById('app')
-    );
-  });
+    )
+  })
 }
