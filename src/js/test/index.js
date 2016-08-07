@@ -1,16 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { test } from './testActions'
 
-const Test = ({ msg }) => {
-  console.log('Test render')
+const Test = ({ clicks, runTest }) => {
   return (
-    <h1>{ msg }</h1>
+    <h1 onClick={runTest}>clicks: { clicks }</h1>
   )
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  msg: ownProps.location.pathname,
+  clicks: state.test.get('num'),
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  runTest: () => dispatch(test()),
 })
 
 export { Test }
-export default connect(mapStateToProps)(Test)
+export default connect(mapStateToProps, mapDispatchToProps)(Test)

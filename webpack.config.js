@@ -7,6 +7,8 @@ module.exports = env => ({
     app: './js/main.js',
     vendor: [
       'babel-polyfill',
+      'immutable',
+      'lodash',
       'react',
       'react-dom',
       'react-redux',
@@ -14,8 +16,7 @@ module.exports = env => ({
       'react-router-redux',
       'redux',
       'redux-thunk',
-      'lodash'
-    ]
+    ],
   },
   output: {
     filename: 'bundle.[name].[hash].js',
@@ -25,11 +26,11 @@ module.exports = env => ({
   plugins: [
     new HtmlWebpackPlugin({
       filename: './index.html',
-      template: './index.html'
+      template: './index.html',
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
+      name: 'vendor',
     }),
   ],
   context: resolve(__dirname, 'src'),
@@ -49,8 +50,8 @@ module.exports = env => ({
   resolve: {
     modules: [
       resolve('./src/js'),
-      resolve('./node_modules')
-    ]
+      resolve('./node_modules'),
+    ],
   },
   module: {
     loaders: [
@@ -62,14 +63,14 @@ module.exports = env => ({
           presets: [
             ['es2015', { 'loose': false, 'modules': false }],
             'stage-0',
-            'react'
+            'react',
           ],
-          plugins: ['react-hot-loader/babel']
-        }
+          plugins: ['react-hot-loader/babel'],
+        },
       },
       {
-        test: /\.css$/, loaders: ['style!css']
-      }
+        test: /\.css$/, loaders: ['style!css'],
+      },
     ],
   },
 })
