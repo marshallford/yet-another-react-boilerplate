@@ -1,17 +1,23 @@
 import 'react-hot-loader/patch'
 import React from 'react'
 import { render } from 'react-dom'
-import { AppContainer } from 'react-hot-loader'
-import configureStore from 'app/store'
+import { AppContainer as HotLoader } from 'react-hot-loader'
 import App from 'app'
-import store from 'app/store'
+import configureStore from 'meta/store/configureStore'
+import { browserHistory } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
+
+const store = configureStore(browserHistory)
+window.store = store
+const history = syncHistoryWithStore(browserHistory, store)
 
 render(
-  <AppContainer>
+  <HotLoader>
     <App
       store={store}
+      history={history}
     />
-  </AppContainer>,
+  </HotLoader>,
   document.getElementById('app')
 )
 
@@ -19,11 +25,12 @@ if (module.hot) {
   module.hot.accept('app', () => {
     const AppNext = require('app').default
     render(
-      <AppComponent>
+      <HotLoader>
         <AppNext
           store={store}
+          history={history}
         />
-      </AppComponent>,
+      </HotLoader>,
       document.getElementById('app')
     )
   })

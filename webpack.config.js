@@ -10,6 +10,8 @@ module.exports = env => ({
       'react',
       'react-dom',
       'react-redux',
+      'react-router',
+      'react-router-redux',
       'redux',
       'redux-thunk',
       'lodash'
@@ -36,6 +38,7 @@ module.exports = env => ({
   devServer: {
     hot: true,
     inline: true,
+    historyApiFallback: true,
     stats: {
       assets: false,
       chunkModules: false,
@@ -66,7 +69,7 @@ module.exports = env => ({
       },
       {
         test: /\.css$/, loaders: ['style!css']
-      },
+      }
     ],
   },
 })

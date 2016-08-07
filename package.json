@@ -44,6 +44,8 @@
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "react-redux": "^4.4.5",
+    "react-router": "^2.6.1",
+    "react-router-redux": "^4.0.5",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0"
   },
@@ -55,6 +57,7 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
     "better-npm-run": "0.0.10",
+    "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.22.0",
     "nodemon": "^1.10.0",
     "react-hot-loader": "^3.0.0-beta.1",
