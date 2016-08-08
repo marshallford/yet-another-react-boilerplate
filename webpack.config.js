@@ -2,6 +2,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const { resolve } = require('path')
 
+const addPlugin = (add, plugin) => add ? plugin : undefined
+const removeEmpty = array => array.filter(i => !!i)
+
 module.exports = env => ({
   entry: {
     app: './js/main.js',
@@ -23,16 +26,32 @@ module.exports = env => ({
     path: resolve(__dirname, 'dist'),
     pathinfo: !env.prod,
   },
-  plugins: [
-    new HtmlWebpackPlugin({
+  plugins: removeEmpty([
+    addPlugin(env.prod || env.dev, new HtmlWebpackPlugin({
       filename: './index.html',
       template: './index.html',
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
+    })),
+    addPlugin(env.prod || env.dev, new webpack.HotModuleReplacementPlugin()),
+    addPlugin(env.prod || env.dev, new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-    }),
-  ],
+    })),
+    addPlugin(env.prod, new webpack.optimize.DedupePlugin()),
+    addPlugin(env.prod, new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false,
+    })),
+    addPlugin(env.prod || env.dev, new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      },
+    })),
+    addPlugin(env.prod, new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        screw_ie8: true,
+        warnings: false,
+      },
+    })),
+  ]),
   context: resolve(__dirname, 'src'),
   devtool: env.prod ? false : 'eval',
   bail: env.prod,
