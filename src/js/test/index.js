@@ -1,10 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { test } from './testActions'
+import { push } from 'react-router-redux'
 
-const Test = ({ clicks, runTest }) => {
+const Test = ({ clicks, runTest, visitAbout }) => {
   return (
-    <h1 onClick={runTest}>clicks: { clicks }</h1>
+    <div>
+      <h1 onClick={runTest}>clicks: { clicks }</h1>
+      <button onClick={visitAbout}>Visit about</button>
+    </div>
   )
 }
 
@@ -14,6 +18,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   runTest: () => dispatch(test()),
+  visitAbout: () => dispatch(push('/about')),
 })
 
 export { Test }
