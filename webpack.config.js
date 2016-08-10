@@ -52,6 +52,7 @@ module.exports = env => ({
         warnings: false,
       },
     })),
+    addPlugin(env.prod, new webpack.optimize.OccurrenceOrderPlugin(true)),
   ]),
   context: resolve(__dirname, 'src'),
   devtool: env.prod ? false : 'eval',
