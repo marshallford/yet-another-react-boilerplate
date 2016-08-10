@@ -32,14 +32,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tmax898/yet-another-react-webpack-boilerplate.git"
+    "url": "git+https://github.com/marshallford/yet-another-react-boilerplate.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tmax898/yet-another-react-webpack-boilerplate/issues"
+    "url": "https://github.com/marshallford/yet-another-react-boilerplate/issues"
   },
-  "homepage": "https://github.com/tmax898/yet-another-react-webpack-boilerplate#readme",
+  "homepage": "https://github.com/marshallford/yet-another-react-boilerplate#readme",
   "dependencies": {
     "immutable": "^3.8.1",
     "lodash": "^4.14.1",
