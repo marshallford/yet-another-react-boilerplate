@@ -14,6 +14,7 @@ module.exports = env => ({
       'lodash',
       'react',
       'react-dom',
+      'react-hot-loader',
       'react-redux',
       'react-router',
       'react-router-redux',

@@ -42,9 +42,10 @@
   "homepage": "https://github.com/marshallford/yet-another-react-boilerplate#readme",
   "dependencies": {
     "immutable": "^3.8.1",
-    "lodash": "^4.14.1",
+    "lodash": "^4.14.2",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
+    "react-hot-loader": "^3.0.0-beta.2",
     "react-redux": "^4.4.5",
     "react-router": "^2.6.1",
     "react-router-redux": "^4.0.5",
@@ -70,7 +71,6 @@
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.22.0",
     "nodemon": "^1.10.0",
-    "react-hot-loader": "^3.0.0-beta.1",
     "rimraf": "^2.5.4",
     "webpack": "^2.1.0-beta.20",
     "webpack-dev-server": "^2.1.0-beta.0"
