@@ -20,7 +20,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => ({
   runTest: () => dispatch(test()),
   visitHome: () => dispatch(push('/')),
-  visitAbout: () => dispatch(push('/test')),
+  visitAbout: () => dispatch(push('/about')),
 })
 
 export { Test }
