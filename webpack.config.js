@@ -1,9 +1,11 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const autoprefixer = require('autoprefixer')
 const webpack = require('webpack')
 const { resolve } = require('path')
 
 const addPlugin = (add, plugin) => add ? plugin : undefined
 const removeEmpty = array => array.filter(i => !!i)
+const addSuffix = (add, str, array) => add ? array.map(i => i + str) : array
 
 module.exports = env => ({
   entry: {
@@ -71,6 +73,7 @@ module.exports = env => ({
   resolve: {
     modules: [
       resolve('./src/js'),
+      resolve('./src/styles'),
       resolve('./node_modules'),
     ],
   },
@@ -90,8 +93,10 @@ module.exports = env => ({
         },
       },
       {
-        test: /\.css$/, loaders: ['style!css'],
+        test: /\.scss$/,
+        loaders: addSuffix(env.dev, '?sourceMap', ['style', 'css', 'postcss', 'sass']),
       },
     ],
   },
+  postcss: () => [autoprefixer],
 })

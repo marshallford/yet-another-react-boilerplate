@@ -1,4 +1,5 @@
 import 'react-hot-loader/patch'
+import 'main.scss'
 import React from 'react'
 import { render } from 'react-dom'
 import { AppContainer as HotLoader } from 'react-hot-loader'
