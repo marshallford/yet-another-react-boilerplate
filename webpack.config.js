@@ -12,6 +12,7 @@ module.exports = env => ({
     app: './js/main.js',
     vendor: [
       'babel-polyfill',
+      'axios',
       'immutable',
       'lodash',
       'react',
