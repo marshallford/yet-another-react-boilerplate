@@ -9,6 +9,7 @@ const Test = ({ clicks, runTest, visitHome, visitAbout }) => {
       <h1 onClick={runTest}>clicks: { clicks }</h1>
       <button onClick={visitAbout}>Visit about</button>
       <button onClick={visitHome}>Visit home</button>
+      <img src={require('assets/350x150.png')} />
     </div>
   )
 }
@@ -22,6 +23,13 @@ const mapDispatchToProps = (dispatch) => ({
   visitHome: () => dispatch(push('/')),
   visitAbout: () => dispatch(push('/about')),
 })
+
+Test.propTypes = {
+  clicks: React.PropTypes.number,
+  runTest: React.PropTypes.func,
+  visitHome: React.PropTypes.func,
+  visitAbout: React.PropTypes.func,
+}
 
 export { Test }
 export default connect(mapStateToProps, mapDispatchToProps)(Test)

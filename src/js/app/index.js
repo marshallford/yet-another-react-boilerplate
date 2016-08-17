@@ -11,4 +11,9 @@ const App = ({ store, history }) => (
   </Provider>
 )
 
+App.propTypes = {
+  store: React.PropTypes.object.isRequired,
+  history: React.PropTypes.object.isRequired,
+}
+
 export default App

@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const webpack = require('webpack')
 const { resolve } = require('path')
@@ -56,6 +57,7 @@ module.exports = env => ({
       },
     })),
     addPlugin(env.prod, new webpack.optimize.OccurrenceOrderPlugin(true)),
+    addPlugin(env.prod, new ExtractTextPlugin('main.css')),
   ]),
   context: resolve(__dirname, 'src'),
   devtool: env.prod ? false : 'eval',
@@ -73,8 +75,8 @@ module.exports = env => ({
   },
   resolve: {
     modules: [
+      resolve('./src'),
       resolve('./src/js'),
-      resolve('./src/styles'),
       resolve('./node_modules'),
     ],
   },
@@ -95,7 +97,13 @@ module.exports = env => ({
       },
       {
         test: /\.scss$/,
-        loaders: addSuffix(env.dev, '?sourceMap', ['style', 'css', 'postcss', 'sass']),
+        loaders: env.prod ? ExtractTextPlugin.extract({
+          loader: ['css', 'postcss', 'sass'],
+        }) : addSuffix(env.dev, '?sourceMap', ['style', 'css', 'postcss', 'sass']),
+      },
+      {
+        test: /\.(jpe?g|png|gif)$/,
+        loader: `${env.prod ? 'file' : 'url'}?name=[path][name].[hash].[ext]`,
       },
     ],
   },
