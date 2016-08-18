@@ -88,7 +88,7 @@ module.exports = env => ({
         exclude: /node_modules/,
         query: {
           presets: [
-            ['es2015', { 'loose': false, 'modules': false }],
+            ['es2015', { 'modules': false }],
             'stage-0',
             'react',
           ],
