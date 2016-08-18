@@ -87,6 +87,7 @@ module.exports = env => ({
         loaders: ['babel'],
         exclude: /node_modules/,
         query: {
+          cacheDirectory: true,
           presets: [
             ['es2015', { 'modules': false }],
             'stage-0',
