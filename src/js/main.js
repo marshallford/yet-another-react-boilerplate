@@ -11,8 +11,11 @@ import { syncHistoryWithStore } from 'react-router-redux'
 const history = syncHistoryWithStore(browserHistory, store)
 const el = document.getElementById('app')
 
+// temporary fix: https://github.com/gaearon/react-hot-loader/pull/314
+const errorReporter = ({ error }) => { throw error }
+
 render(
-  <HotLoader>
+  <HotLoader errorReporter={errorReporter}>
     <App
       store={store}
       history={history}
@@ -24,7 +27,7 @@ render(
 if (module.hot) {
   module.hot.accept('app', () => {
     render(
-      <HotLoader>
+      <HotLoader errorReporter={errorReporter}>
         <App
           store={store}
           history={history}
