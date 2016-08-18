@@ -37,6 +37,7 @@ module.exports = env => ({
       template: './index.html',
     })),
     addPlugin(env.prod || env.dev, new webpack.HotModuleReplacementPlugin()),
+    addPlugin(env.prod || env.dev, new webpack.NamedModulesPlugin()),
     addPlugin(env.prod || env.dev, new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
     })),
