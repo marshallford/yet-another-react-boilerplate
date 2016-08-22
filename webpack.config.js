@@ -10,7 +10,7 @@ const addSuffix = (add, str, array) => add ? array.map(i => i + str) : array
 
 module.exports = env => ({
   entry: {
-    app: './js/main.js',
+    app: './js/app/main.js',
     vendor: [
       'babel-polyfill',
       'axios',
@@ -64,7 +64,8 @@ module.exports = env => ({
   devtool: env.prod ? false : 'eval',
   bail: env.prod,
   devServer: {
-    hot: true,
+    hot: true, // full reload on error, but shows actual error unlike hotOnly
+    // hotOnly: true,
     inline: true,
     historyApiFallback: true,
     stats: {
