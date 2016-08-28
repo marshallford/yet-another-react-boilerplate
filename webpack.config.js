@@ -3,6 +3,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const webpack = require('webpack')
 const { resolve } = require('path')
+const config = require('./config')
 
 const addPlugin = (add, plugin) => add ? plugin : undefined
 const removeEmpty = array => array.filter(i => !!i)
@@ -11,20 +12,7 @@ const addSuffix = (add, str, array) => add ? array.map(i => i + str) : array
 module.exports = env => ({
   entry: {
     app: './js/app/main.js',
-    vendor: [
-      'babel-polyfill',
-      'axios',
-      'immutable',
-      'lodash',
-      'react',
-      'react-dom',
-      'react-hot-loader',
-      'react-redux',
-      'react-router',
-      'react-router-redux',
-      'redux',
-      'redux-thunk',
-    ],
+    vendor: config.vendor_modules,
   },
   output: {
     filename: 'bundle.[name].[hash].js',
@@ -49,6 +37,7 @@ module.exports = env => ({
     addPlugin(env.prod || env.dev, new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        VERSION: JSON.stringify(require('./package.json').version),
       },
     })),
     addPlugin(env.prod, new webpack.optimize.UglifyJsPlugin({
@@ -58,7 +47,7 @@ module.exports = env => ({
       },
     })),
     addPlugin(env.prod, new webpack.optimize.OccurrenceOrderPlugin(true)),
-    addPlugin(env.prod, new ExtractTextPlugin('main.css')),
+    addPlugin(env.prod, new ExtractTextPlugin('main.[hash].css')),
   ]),
   context: resolve(__dirname, 'src'),
   devtool: env.prod ? false : 'eval',
@@ -68,6 +57,7 @@ module.exports = env => ({
     // hotOnly: true,
     inline: true,
     historyApiFallback: true,
+    host: '0.0.0.0',
     stats: {
       assets: false,
       chunkModules: false,
@@ -107,6 +97,10 @@ module.exports = env => ({
       {
         test: /\.(jpe?g|png|gif)$/,
         loader: `${env.prod ? 'file' : 'url'}?name=[path][name].[hash].[ext]`,
+      },
+      {
+        test: /\.json$/,
+        loader: ['json-loader'],
       },
     ],
   },

@@ -1,6 +1,4 @@
 @import '~normalize.css/normalize';
-
-body {
-  background-image: url("../assets/wov.png");
-  background-repeat: repeat;
-}
+@import 'h5bp';
+@import 'utils';
+@import 'app';

@@ -1,0 +1,27 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+/* http://www.paulirish.com/2012/box-sizing-border-box-ftw/ */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* https://css-tricks.com/snippets/css/force-vertical-scrollbar/ */
+html {
+  overflow-y: scroll;
+}
+
+/* clearfix */
+@mixin group() {
+  & {
+    *zoom: 1;
+  }
+  &:before, &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
