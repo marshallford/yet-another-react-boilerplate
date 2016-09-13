@@ -9,7 +9,6 @@ module.exports = {
     'react-hot-loader',
     'react-redux',
     'react-router',
-    'react-router-redux',
     'redux',
     'redux-thunk',
     'reselect',

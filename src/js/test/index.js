@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import { test } from './testActions'
-import { push } from 'react-router-redux'
 
 const Test = ({ clicks, runTest, visitHome, visitAbout }) => {
   return (
@@ -18,10 +18,10 @@ const mapStateToProps = (state, ownProps) => ({
   clicks: state.test.get('num'),
 })
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   runTest: () => dispatch(test()),
-  visitHome: () => dispatch(push('/')),
-  visitAbout: () => dispatch(push('/about')),
+  visitHome: () => ownProps.router.push('/'),
+  visitAbout: () => ownProps.router.push('/about'),
 })
 
 Test.propTypes = {
@@ -32,4 +32,4 @@ Test.propTypes = {
 }
 
 export { Test }
-export default connect(mapStateToProps, mapDispatchToProps)(Test)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Test))
