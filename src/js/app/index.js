@@ -1,19 +1,16 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { Router } from 'react-router'
-import makeRoutes from 'meta/routes'
+import store from 'meta/store'
+import { BrowserRouter, Match } from 'react-router'
 
-const routes = makeRoutes()
+import Test from 'test'
 
-const App = ({ store, history }) => (
+const App = () => (
   <Provider store={store}>
-    <Router history={history} routes={routes} />
+    <BrowserRouter>
+      <Match exactly pattern='/' component={Test} />
+    </BrowserRouter>
   </Provider>
 )
-
-App.propTypes = {
-  store: React.PropTypes.object.isRequired,
-  history: React.PropTypes.object.isRequired,
-}
 
 export default App

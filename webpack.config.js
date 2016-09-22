@@ -46,6 +46,10 @@ module.exports = env => ({
         screw_ie8: true,
         warnings: false,
       },
+      output: {
+        comments: false,
+      },
+      sourceMap: false,
     })),
     addPlugin(env.prod, new webpack.optimize.OccurrenceOrderPlugin(true)),
     addPlugin(env.prod, new ExtractTextPlugin('main.[hash].css')),
