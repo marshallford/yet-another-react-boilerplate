@@ -1,6 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const autoprefixer = require('autoprefixer')
 const webpack = require('webpack')
 const { resolve } = require('path')
 const config = require('./config')
@@ -29,7 +28,6 @@ module.exports = env => ({
     addPlugin(env.prod || env.dev, new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
     })),
-    addPlugin(env.prod, new webpack.optimize.DedupePlugin()),
     addPlugin(env.prod, new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false,
@@ -70,6 +68,9 @@ module.exports = env => ({
       hash: false,
     },
   },
+  performance: {
+    hints: false,
+  },
   resolve: {
     modules: [
       resolve('./src'),
@@ -81,7 +82,7 @@ module.exports = env => ({
     loaders: [
       {
         test: /\.js$/,
-        loaders: ['babel'],
+        loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
           cacheDirectory: true,
@@ -96,12 +97,12 @@ module.exports = env => ({
       {
         test: /\.scss$/,
         loaders: env.prod ? ExtractTextPlugin.extract({
-          loader: ['css', 'postcss', 'sass'],
-        }) : addSuffix(env.dev, '?sourceMap', ['style', 'css', 'postcss', 'sass']),
+          loader: ['css-loader', 'postcss-loader', 'sass-loader'],
+        }) : addSuffix(env.dev, '?sourceMap', ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']),
       },
       {
         test: /\.(jpe?g|png|gif)$/,
-        loader: `${env.prod ? 'file' : 'url'}?name=[path][name].[hash].[ext]`,
+        loader: `${env.prod ? 'file-loader' : 'url-loader'}?name=[path][name].[hash].[ext]`,
       },
       {
         test: /\.json$/,
@@ -109,5 +110,4 @@ module.exports = env => ({
       },
     ],
   },
-  postcss: () => [autoprefixer],
 })
