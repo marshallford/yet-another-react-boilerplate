@@ -38,7 +38,7 @@ module.exports = env => ({
         VERSION: JSON.stringify(require('./package.json').version),
       },
     })),
-    addPlugin(env.dev, new webpack.NoErrorsPlugin()),
+    addPlugin(env.dev, new webpack.NoEmitOnErrorsPlugin()),
     addPlugin(env.prod, new webpack.optimize.UglifyJsPlugin({
       compress: {
         screw_ie8: true,
