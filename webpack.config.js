@@ -22,7 +22,7 @@ module.exports = env => ({
     addPlugin(env.prod || env.dev, new HtmlWebpackPlugin({
       template: './index.html',
     })),
-    addPlugin(env.prod, new webpack.HotModuleReplacementPlugin()),
+    addPlugin(env.dev, new webpack.HotModuleReplacementPlugin()),
     addPlugin(env.prod || env.dev, new webpack.NamedModulesPlugin()),
     addPlugin(env.prod || env.dev, new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
