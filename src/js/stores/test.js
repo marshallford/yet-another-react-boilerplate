@@ -7,7 +7,7 @@ class Test {
     this.count = 0
   }
 
-  @action setCount (data) {
+  @action.bound setCount (data) {
     this.count = data
   }
 }

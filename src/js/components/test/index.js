@@ -1,18 +1,28 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 
-const Test = inject('test')(observer((props) => {
-  const upCount = () => {
-    props.test.setCount(props.test.count + 1)
+const Test = (props) => {
+  const incrementCount = () => {
+    props.setCount(props.count + 1)
   }
 
   return (
     <div>
-      <h1 onClick={upCount}>count: { props.test.count }</h1>
-      <p>test</p>
+      <h1 onClick={incrementCount}>count: { props.count }</h1>
       <img src={require('assets/350x150.png')} />
     </div>
   )
-}))
+}
 
-export default Test
+Test.propTypes = {
+  count: React.PropTypes.number.isRequired,
+  setCount: React.PropTypes.func.isRequired,
+}
+
+export default inject(
+  stores => ({
+    count: stores.test.count,
+    setCount: stores.test.setCount,
+  })
+)(observer(Test))
+export { Test }
