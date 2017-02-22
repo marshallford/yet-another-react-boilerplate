@@ -22,13 +22,12 @@ module.exports = env => ({
     addPlugin(env.prod || env.dev, new HtmlWebpackPlugin({
       template: './index.html',
     })),
-    addPlugin(env.prod || env.dev, new webpack.HotModuleReplacementPlugin()),
+    addPlugin(env.prod, new webpack.HotModuleReplacementPlugin()),
     addPlugin(env.prod || env.dev, new webpack.NamedModulesPlugin()),
     addPlugin(env.prod || env.dev, new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks: Infinity,
     })),
-    addPlugin(env.prod, new webpack.LoaderOptionsPlugin({
+    addPlugin(env.prod || env.dev, new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false,
     })),
@@ -38,7 +37,6 @@ module.exports = env => ({
         VERSION: JSON.stringify(packageInfo.version),
       },
     })),
-    addPlugin(env.dev, new webpack.NoEmitOnErrorsPlugin()),
     addPlugin(env.prod, new webpack.optimize.UglifyJsPlugin({
       compress: {
         screw_ie8: true,
@@ -53,7 +51,7 @@ module.exports = env => ({
     addPlugin(env.prod, new ExtractTextPlugin('main.[hash].css')),
   ]),
   context: resolve(__dirname, 'src'),
-  devtool: env.prod ? false : 'eval',
+  devtool: env.prod ? false : 'cheap-module-eval-source-map',
   bail: env.prod,
   devServer: {
     hot: true, // full reload on error, but shows actual error unlike hotOnly

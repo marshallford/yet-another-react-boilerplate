@@ -21,7 +21,7 @@
       }
     },
     "build:prod": {
-      "command": "npm run clean &&  webpack --env.prod",
+      "command": "npm run clean && webpack --env.prod",
       "env": {
         "NODE_ENV": "production"
       }
