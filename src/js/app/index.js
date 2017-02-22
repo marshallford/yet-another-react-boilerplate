@@ -1,15 +1,15 @@
 import React from 'react'
-import { Provider } from 'react-redux'
-import store from 'meta/store'
-import { BrowserRouter, Match } from 'react-router'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Provider } from 'mobx-react'
+import stores from 'stores'
 
-import Test from 'test'
+import Test from 'components/test'
 
 const App = () => (
-  <Provider store={store}>
-    <BrowserRouter>
-      <Match exactly pattern='/' component={Test} />
-    </BrowserRouter>
+  <Provider {...stores}>
+    <Router>
+      <Route exact pattern='/' component={Test} />
+    </Router>
   </Provider>
 )
 

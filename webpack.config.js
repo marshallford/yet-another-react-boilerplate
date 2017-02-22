@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const webpack = require('webpack')
 const { resolve } = require('path')
-const config = require('./config')
+const packageInfo = require('./package.json')
 
 const addPlugin = (add, plugin) => add ? plugin : undefined
 const removeEmpty = array => array.filter(i => !!i)
@@ -10,8 +10,8 @@ const addSuffix = (add, str, array) => add ? array.map(i => i + str) : array
 
 module.exports = env => ({
   entry: {
+    vendor: ['babel-polyfill', ...Object.keys(packageInfo.dependencies)].filter((val) => val !== 'normalize.css'),
     app: './js/app/main.js',
-    vendor: config.vendor_modules,
   },
   output: {
     filename: 'bundle.[name].[hash].js',
@@ -20,13 +20,13 @@ module.exports = env => ({
   },
   plugins: removeEmpty([
     addPlugin(env.prod || env.dev, new HtmlWebpackPlugin({
-      filename: './index.html',
       template: './index.html',
     })),
     addPlugin(env.prod || env.dev, new webpack.HotModuleReplacementPlugin()),
     addPlugin(env.prod || env.dev, new webpack.NamedModulesPlugin()),
     addPlugin(env.prod || env.dev, new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
+      minChunks: Infinity,
     })),
     addPlugin(env.prod, new webpack.LoaderOptionsPlugin({
       minimize: true,
@@ -35,7 +35,7 @@ module.exports = env => ({
     addPlugin(env.prod || env.dev, new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-        VERSION: JSON.stringify(require('./package.json').version),
+        VERSION: JSON.stringify(packageInfo.version),
       },
     })),
     addPlugin(env.dev, new webpack.NoEmitOnErrorsPlugin()),
@@ -91,13 +91,13 @@ module.exports = env => ({
             'stage-0',
             'react',
           ],
-          plugins: ['react-hot-loader/babel'],
+          plugins: ['react-hot-loader/babel', 'transform-decorators-legacy', 'lodash'],
         },
       },
       {
         test: /\.scss$/,
         loaders: env.prod ? ExtractTextPlugin.extract({
-          loader: ['css-loader', 'postcss-loader', 'sass-loader'],
+          use: ['css-loader', 'postcss-loader', 'sass-loader'],
         }) : addSuffix(env.dev, '?sourceMap', ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']),
       },
       {
