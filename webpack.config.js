@@ -10,8 +10,9 @@ const addSuffix = (add, str, array) => add ? array.map(i => i + str) : array
 
 module.exports = env => ({
   entry: {
-    vendor: ['babel-polyfill', ...Object.keys(packageInfo.dependencies)].filter((val) => val !== 'normalize.css'),
-    app: './js/app/main.js',
+    // babel-plugin-lodash seems to only work with one big bundle, might be a webpack 2 tree shaking issue
+    // vendor: ['babel-polyfill', ...Object.keys(packageInfo.dependencies)].filter((val) => val !== 'normalize.css'),
+    app: ['babel-polyfill', './js/app/main.js'],
   },
   output: {
     filename: 'bundle.[name].[hash].js',
@@ -24,9 +25,9 @@ module.exports = env => ({
     })),
     addPlugin(env.dev, new webpack.HotModuleReplacementPlugin()),
     addPlugin(env.prod || env.dev, new webpack.NamedModulesPlugin()),
-    addPlugin(env.prod || env.dev, new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-    })),
+    // addPlugin(env.prod || env.dev, new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'vendor',
+    // })),
     addPlugin(env.prod || env.dev, new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false,
