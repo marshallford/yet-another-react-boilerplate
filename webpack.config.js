@@ -82,7 +82,6 @@ module.exports = env => ({
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/,
         query: {
           cacheDirectory: true,
           presets: [
@@ -92,20 +91,29 @@ module.exports = env => ({
           ],
           plugins: ['react-hot-loader/babel', 'transform-decorators-legacy', 'lodash'],
         },
+        exclude: [resolve('./src/static'), /node_modules/],
       },
       {
         test: /\.scss$/,
         loaders: env.prod ? ExtractTextPlugin.extract({
           use: ['css-loader', 'postcss-loader', 'sass-loader'],
         }) : addSuffix(env.dev, '?sourceMap', ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']),
+        exclude: [resolve('./src/static')],
       },
       {
         test: /\.(jpe?g|png|gif)$/,
         loader: `${env.prod ? 'file-loader' : 'url-loader'}?name=[path][name].[hash].[ext]`,
+        exclude: [resolve('./src/static')],
+      },
+      {
+        test: /\.*$/,
+        loader: `${env.prod ? 'file-loader' : 'file-loader'}?name=[name].[ext]`,
+        include: [resolve('./src/static')],
       },
       {
         test: /\.json$/,
         loader: ['json-loader'],
+        exclude: [resolve('./src/static')],
       },
     ],
   },
