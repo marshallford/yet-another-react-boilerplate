@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 
 const Test = (props) => {
@@ -15,8 +16,8 @@ const Test = (props) => {
 }
 
 Test.propTypes = {
-  count: React.PropTypes.number.isRequired,
-  setCount: React.PropTypes.func.isRequired,
+  count: PropTypes.number.isRequired,
+  setCount: PropTypes.func.isRequired,
 }
 
 export default inject(
