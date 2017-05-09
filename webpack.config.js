@@ -110,11 +110,6 @@ module.exports = env => ({
         loader: `${env.prod ? 'file-loader' : 'file-loader'}?name=[name].[ext]`,
         include: [resolve('./src/static')],
       },
-      {
-        test: /\.json$/,
-        loader: ['json-loader'],
-        exclude: [resolve('./src/static')],
-      },
     ],
   },
 })
